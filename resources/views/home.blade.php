@@ -19,7 +19,11 @@
                         <h3 class="font-w300 text-white">Teknikal</h3>
                     </div>
                     <div class="block-content block-content-full text-center">
+                        @if(Auth::User()->hasRole == "user")
                         <a class="btn btn-sm btn-default" href="/e-aduan">
+                        @else
+                        <a class="btn btn-sm btn-default" href="/admin/e-aduan">
+                        @endif
                             <i class="fa fa-fw fa-plus text-success"></i> Klik Disini
                         </a>
                     </div>

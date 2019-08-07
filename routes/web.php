@@ -61,7 +61,11 @@ Route::group(['middleware' => ['role:admin']], function()
 	# E-Aduan Module
 		## GET Routes
 		Route::get('/admin/e-aduan', 'AdminController@SenaraiAduan');
+		Route::get('/admin/e-aduan/{stat}', 'AdminController@SenaraiAduan');
 		Route::get('/e-aduan/admin/view/{idaduan}', 'AdminController@ViewAduan');
+
+		##POST Routes
+		Route::post('/e-aduan/admin/butiran', 'AdminController@SaveButiran');
 
 });
 

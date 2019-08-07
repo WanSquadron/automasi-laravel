@@ -30,6 +30,7 @@
         <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('oneui/img/favicons/apple-touch-icon-144x144.png') }}">
         <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('oneui/img/favicons/apple-touch-icon-152x152.png') }}">
         <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('oneui/img/favicons/apple-touch-icon-180x180.png') }}">
+
         <!-- END Icons -->
 
         <!-- Stylesheets -->
@@ -41,6 +42,7 @@
         <link rel="stylesheet" id="css-main" href="{{ asset('oneui/css/oneui.css') }}">
         <link rel="stylesheet" href="{{ asset('oneui/js/plugins/sweetalert2/sweetalert2.min.css') }}">
         <link rel="stylesheet" href="{{ asset('/oneui/js/plugins/datatables/jquery.dataTables.min.css') }}">
+        <link href="{{ asset('/oneui/js/plugins/pickadate/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 
         <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
         <!-- <link rel="stylesheet" id="css-theme" href="oneui/css/themes/flat.min.css"> -->
@@ -160,24 +162,17 @@
                                 </li>
                                 <li class="nav-main-heading"><a href="#"><span class="sidebar-mini-hide">e-Aduan </span></a>
                                     <li>
-                                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-badge"></i><span class="sidebar-mini-hide">Kerosakan</span></a>
-                                        <ul>
-                                            <li>
-                                                <a href="/admin/e-aduan">Senarai Aduan</a>
-                                            </li>
-                                            <li>
-                                                <a href="/admin/e-aduan/laporan">Laporan</a>
-                                            </li>
-                                        </ul>
+                                        <a href="/admin/e-aduan"><i class="si si-badge"></i>Senarai Aduan</a>
+                                    </li>
                                 </li>
                                 <li class="nav-main-heading">
-                                    <a href="/admin/e-bilik"><span class="sidebar-mini-hide">e-Bilik</span></a>
+                                    <a href="/e-bilik"><span class="sidebar-mini-hide">e-Bilik</span></a>
                                 </li>
                                 <li class="nav-main-heading">
-                                    <a href="/admin/e-agenda"><span class="sidebar-mini-hide">e-Agenda</span></a>
+                                    <a href="/e-agenda"><span class="sidebar-mini-hide">e-Agenda</span></a>
                                 </li>
                                 <li class="nav-main-heading">
-                                    <a href="/admin/e-dokumen"><span class="sidebar-mini-hide">e-Dokumen</span></a>
+                                    <a href="/e-dokumen"><span class="sidebar-mini-hide">e-Dokumen</span></a>
                                 </li>
                                 <li>
                                     <a class="nav-main-heading" href="{{ route('logout') }}"
@@ -216,7 +211,7 @@
                                     <li class="divider"></li>
                                     <li class="dropdown-header">Kawalan</li>
                                     <li>
-                                        <a tabindex="-1" href="base_pages_lock.html">
+                                        <a tabindex="-1" href="javascript:void(0)">
                                             <i class="si si-lock pull-right"></i>Kunci Skrin
                                         </a>
                                     </li>
@@ -311,6 +306,8 @@
         <script src="{{ asset('oneui/js/plugins/chartjs/Chart.min.js') }}"></script>
         <script src="{{ asset('oneui/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
         <script src="{{ asset('/oneui/js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('/oneui/js/pages/base_tables_datatables.js') }}"></script>
+        <script src="{{ asset('/oneui/js/plugins/pickadate/js/bootstrap-datepicker.min.js') }}"></script>
         
 
         <!-- Page JS Code -->
@@ -319,6 +316,16 @@
             jQuery(function () {
                 // Init page helpers (CountTo plugin)
                 App.initHelpers('appear-countTo');
+                $('#sandbox-container .input-group.date').datepicker({
+              startDate: "-12/30/2018",
+              dateFormat: 'dd-mm-yy',
+              endDate: "+01/15/2025",
+              startView: 1,
+              clearBtn: true,
+              calendarWeeks: true,
+              autoclose: true,
+              todayHighlight: true
+            }).val();
             });
         </script>
 @yield('js')

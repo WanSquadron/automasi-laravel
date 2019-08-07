@@ -10,7 +10,7 @@ class Aduan extends Model
 
     public function User()
     {
-        return $this->belongsTo('App\User', 'idtms', 'fk_idtmspengadu');
+        return $this->belongsTo('App\User', 'fk_idtmspengadu', 'idtms');
     }
 
     public function NamaKategoriAlat(){
@@ -26,6 +26,16 @@ class Aduan extends Model
     public function getNamaPengaduAttribute() {
     	$pengadu = User::where('idtms', '=', $this->fk_idtmspengadu)->first();
     	return $pengadu['name'];
+    }
+
+    public function getNamaSektorAttribute(){
+        $namasektor = GlobalSektor::where('idsektor', $this->fk_idsektor)->first();
+        return $namasektor['namasektor'];
+    }
+
+    public function getNamaUnitAttribute(){
+        $namaunit = GlobalUnit::where('idunit', $this->fk_idunit)->first();
+        return $namaunit['namaunit'];
     }
 
     public function getTarikhLaporAttribute(){

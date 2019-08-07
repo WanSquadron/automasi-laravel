@@ -39,7 +39,8 @@ class AduanController extends Controller
     	$aduan->idaduan = $notickets->ticketnum;
     	$aduan->idtmsft = "NULL";
     	$aduan->fk_idtmspengadu = Auth::User()->idtms;
-    	$aduan->fk_idunit = "-";
+        $aduan->fk_idsektor = Auth::User()->fk_idsektor;
+    	$aduan->fk_idunit = Auth::User()->fk_idunit;
     	$aduan->fk_idkategorialat = $kategorialat;
     	$aduan->ext = $ext;
     	$aduan->nodhm = $nodhm;
@@ -55,7 +56,7 @@ class AduanController extends Controller
 
         $bot_token = "769423440:AAHdWT6cIWTKFgu7ZAn_gzC_5eINAxeHsDc";
         
-        $txtwan = "<b>Sistem Automasi JPNPerak</b> \nHai Syazwan Shahferi, anda ada satu laporan kerosakkan baru. \nNama Pengadu :". Auth::User()->name."  \nSektor/Unit : ".Auth::User()->fk_idsektor."  \nKeterangan Masalah : $keterangan \nTarikh : ".$tarikh."\nMasa : ".$masa;
+        $txtwan = "<b>Sistem Automasi JPNPerak</b> \nHai Syazwan Shahferi, anda ada satu laporan kerosakkan baru. \nNama Pengadu :". Auth::User()->name."  \nSektor/Unit : ".Auth::User()->NamaUnit."  \nKeterangan Masalah : $keterangan \nTarikh : ".$tarikh."\nMasa : ".$masa;
         
         $bot = new TelegramBot($bot_token);
         $bot->sendApiMsg(30461455, $txtwan, false, 'html', false);
@@ -78,11 +79,11 @@ class AduanController extends Controller
     	$senarai = Aduan::where('fk_idtmspengadu', Auth::User()->idtms)->orderBy('created_at', 'DESC')->get();
     	$jumlahaduan = Aduan::where('fk_idtmspengadu', Auth::User()->idtms)->count();
     	$todayaduan = Aduan::where('fk_idtmspengadu', Auth::User()->idtms)->where('tarikh_aduan','=', date('Y-m-d'))->count();
-    	$closeaduan = Aduan::where('fk_idtmspengadu', Auth::User()->idtms)->where('statustutup','Y')->count();
+    	$closeaduan = Aduan::where('fk_idtmspengadu', Auth::User()->idtms)->where('fk_idstatusaduan','2')->count();
     	$openaduan = Aduan::where('fk_idtmspengadu', Auth::User()->idtms)
     					  ->where(function ($query) {
-    							$query->where('statustutup','N')
-    							      ->orwhere('statustutup','KIV');
+    							$query->where('fk_idstatusaduan','1')
+    							      ->orwhere('fk_idstatusaduan','3');
     				})->count();
 
 
@@ -102,8 +103,8 @@ class AduanController extends Controller
 
     	$jumlahaduan = Aduan::where('fk_idtmspengadu', Auth::User()->idtms)->count();
     	$todayaduan = Aduan::where('fk_idtmspengadu', Auth::User()->idtms)->where('tarikh_aduan','=', date('Y-m-d'))->count();
-    	$closeaduan = Aduan::where('fk_idtmspengadu', Auth::User()->idtms)->where('statustutup','Y')->count();
-    	$openaduan = Aduan::where('fk_idtmspengadu', Auth::User()->idtms)->where('statustutup','N')->orwhere('statustutup','KIV')->count();
+    	$closeaduan = Aduan::where('fk_idtmspengadu', Auth::User()->idtms)->where('fk_idstatusaduan','2')->count();
+    	$openaduan = Aduan::where('fk_idtmspengadu', Auth::User()->idtms)->where('fk_idstatusaduan','1')->orwhere('fk_idstatusaduan','3')->count();
     	
     	return view('aduan.viewaduan', [
     									'aduan' => $aduan = Aduan::where('idaduan', $id)->where('fk_idtmspengadu', Auth::User()->idtms)->first(), 

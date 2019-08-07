@@ -48,7 +48,7 @@
                         <div class="col-sm-5">
                             <div class="form-group">
                                 <div class="col-xs-12">
-                                    <label for="mega-city">No Daftar Harta Modal</label>
+                                    <label for="mega-city">No Daftar Harta Modal/No. Siri Peralatan</label>
                                     <input class="form-control input-lg" type="text" id="nodhm" name="nodhm" placeholder="Isikan No Daftar Harta Modal">
                                 </div>
                             </div>

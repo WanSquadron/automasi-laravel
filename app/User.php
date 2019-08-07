@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Aduan', 'fk_idtmspengadu', 'idtms');
     }
+
+    public function getNamaUnitAttribute(){
+        $nama = GlobalUnit::where('idunit', $this->fk_idunit)->first();
+        return $namaunit = $nama['namaunit'];
+    }
 }

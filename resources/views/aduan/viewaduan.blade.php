@@ -56,13 +56,13 @@
 			<div class="block">
 				<div class="block-header">
     				<h3 class="block-title">@php $idaduan = sprintf('%08d', $aduan->idaduan); @endphp #{{$idaduan}}<br><small>{{$aduan->TarikhLapor}}</small><br><br>
-    					@if($aduan->statustutup == 'N')
-                            <span class="label label-success">Open</span>
-                            @elseif($aduan->statustutup == 'KIV')
-                                <span class="label label-warning">KIV</span>
-                        @else 
-                            <span class="label label-danger">Close</span>
-                        @endif</h3>
+    					@if($aduan->fk_idstatusaduan == '1')
+                                        <span class="label label-success">Open</span>
+                                        @elseif($aduan->fk_idstatusaduan == '3')
+                                            <span class="label label-warning">KIV</span>
+                                    @else 
+                                        <span class="label label-danger">Close</span>
+                                    @endif</h3>
 				</div>
 			    <div class="block-content">
             		<table class="table">

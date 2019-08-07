@@ -76,10 +76,10 @@
                             @php $idaduan = sprintf('%08d', $report->idaduan); @endphp
                             <tr>
                                 <td class="font-w600 text-center" style="width: 120px;">#{{ $idaduan }}</td>
-                                <td class="hidden-xs hidden-sm hidden-md text-center" style="width: 100px;">
-                                    @if($report->statustutup == 'N')
+                                <td class="text-center" style="width: 100px;">
+                                    @if($report->fk_idstatusaduan == '1')
                                         <span class="label label-success">Open</span>
-                                        @elseif($report->statustutup == 'KIV')
+                                        @elseif($report->fk_idstatusaduan == '3')
                                             <span class="label label-warning">KIV</span>
                                     @else 
                                         <span class="label label-danger">Close</span>
@@ -88,10 +88,10 @@
                                 <td>
                                     <a class="font-w600" href="/e-aduan/view/{{$report->idaduan}}">{{ $report->keterangan }}</a>
                                 </td>
-                                <td class="hidden-xs hidden-sm hidden-md text-muted text-center" style="width: 120px;">
+                                <td class=" text-muted text-center" style="width: 120px;">
                                     <em>{{ $report->NamaKategori }}</em>
                                 </td>
-                                <td class="hidden-xs hidden-sm hidden-md" style="width: 180px;">
+                                <td class="text-left" style="width: 180px;">
                                     {{ $report->TarikhLapor }}
                                 </td>
                             </tr>
@@ -109,7 +109,6 @@
 
 @section('js')
 
-<script src="{{ asset('/oneui/js/pages/base_tables_datatables.js') }}"></script>
 <script type="text/javascript">
 
 @if ($stat == 'success')    
